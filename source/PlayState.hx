@@ -3084,7 +3084,7 @@ Lib.application.window.resize(width, height);*/
 						if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
 							health -= 0.0475;
 						}
-					});
+					}
 					for (daNote in unspawnNotes) {
 						if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
 							health -= 0.0475;
