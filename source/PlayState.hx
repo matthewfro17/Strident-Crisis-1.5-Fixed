@@ -378,8 +378,6 @@ class PlayState extends MusicBeatState
 	var windowX:Int = 0;
 	var windowY:Int = 0;
 
-
-	var usedBotplayBefore:Bool = false;
 	// Lua shit
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
@@ -3042,47 +3040,45 @@ Lib.application.window.resize(width, height);*/
 	var transitioning = false;
 	public function endSong():Void
 	{
-		if(!usedBotplayBefore)
+		if(curSong == 'Ornery' && storyDifficulty >= 1)
 		{
-			if(curSong == 'Ornery' && storyDifficulty >= 1)
+			FlxG.save.data.goldenUnlocked = true;
+			trace("unlocked golden");
+		}
+		if(curSong == 'Fucked' && storyDifficulty >= 1)
+		{
+			FlxG.save.data.fuckedUnlocked = true;
+			trace("unlocked fucked");
+		}
+		if(curSong == 'Tribulation' && storyDifficulty >= 1)
+		{
+			FlxG.save.data.tribUnlocked = true;
+			trace("unlocked tribulation");
+		}
+		if(storyWeek == 3)
+		{
 			{
-				FlxG.save.data.goldenUnlocked = true;
-				trace("unlocked golden");
-			}
-			if(curSong == 'Fucked' && storyDifficulty >= 1)
-			{
-				FlxG.save.data.fuckedUnlocked = true;
-				trace("unlocked fucked");
-			}
-			if(curSong == 'Tribulation' && storyDifficulty >= 1)
-			{
-				FlxG.save.data.tribUnlocked = true;
-				trace("unlocked tribulation");
-			}
-			if(storyWeek == 3)
-			{
-				{
-					FlxG.save.data.orneryUnlocked = true;
-					trace("unlocked ornery");
-				}
-			}
-			if(storyWeek == 4)
-			{
-				{
-					FlxG.save.data.invisibleWeekUnlocked1 = true;
-					FlxG.save.data.invisibleWeekUnlocked2 = true;
-					trace("unlocked the week");
-				}
-			}			
-			if(storyWeek == 5)
-			{
-				{
-					FlxG.save.data.spamophobiaUnlocked = true;
-					trace("unlocked spamophobia");
-				}
+				FlxG.save.data.orneryUnlocked = true;
+				trace("unlocked ornery");
 			}
 		}
-		//Should kill you if you tried to cheat
+		if(storyWeek == 4)
+		{
+			{
+				FlxG.save.data.invisibleWeekUnlocked1 = true;
+				FlxG.save.data.invisibleWeekUnlocked2 = true;
+				trace("unlocked the week");
+			}
+		}			
+		if(storyWeek == 5)
+		{
+			{
+				FlxG.save.data.spamophobiaUnlocked = true;
+				trace("unlocked spamophobia");
+			}
+		}
+	}
+	//Should kill you if you tried to cheat
 				if(!startingSong) {
 					notes.forEach(function(daNote:Note) {
 						if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
